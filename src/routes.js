@@ -15,12 +15,12 @@ router.get('/estoques', selectEstoque);
 router.get('/atendimentos', selectAtendimentos);
 
 // ==> Rota responsável por consolidar a tabela de atendimento por pólo: (GET): localhost:3000/stock
-router.get('/stock', SumAllStock);
+router.get('/stocks/', SumAllStock);
 
 // ==> Rota responsável por consolidar a tabela de atendimento por pólo: (GET): localhost:3000/stock/:polo
-router.get('/stock/:polo', SumUmStock);
+router.get('/stock/', SumUmStock);
 
 // ==> Rota responsável por criar um novo 'Stock': (POST): localhost:4000/api/stock/:polo
-router.post("/stock/:polo", AddStock);
+router.put('/stock/', AddStock);
 
 export default router;

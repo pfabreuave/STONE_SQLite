@@ -19,8 +19,8 @@ export async function selectAtendimentos(req, res){
   consolidação de todos os POLOS das tabelas ATENDIMENTO e STOCK
 */
 export async function SumAllStock(req, res)  {
-    openDb().then(db=>{ 
-    db.all(`SELECT polo, stock, venda, dias_Hab,
+    openDb().then(db=>{db.all
+    (`SELECT polo, stock, venda, dias_Hab,
     (venda / dias_hab) as media,
     (stock / (venda / dias_hab) )  as auto,
     CASE WHEN ((stock / (Venda / Dias_Hab))) < 10 THEN 1
@@ -48,6 +48,7 @@ GROUP BY atendimentos.polo, estoque.stock) as selt`,
   consolidação de um POLO das tabelas ATENDIMENTO e STOCK
 */
 export async function SumUmStock(req, res)  {
+    let polo = req.body.polo;
     openDb().then(db=>{ 
     db.all(`SELECT polo, stock, venda, dias_Hab,
     (venda / dias_hab) as media,
@@ -81,53 +82,14 @@ GROUP BY atendimentos.polo, estoque.stock) as selt`,
 */
        export async function AddStock(req, res)  { 
        
-        const polo = req.params.polo;
-        const stock = req.body.stock;
-       
-        const response =     db.query(
-          "UPDATE estoque SET stock = $1 WHERE polo LIKE '%' || $2 || '%'",
-          [stock, polo]
-        );
-        res.status(200).send(console.log("estoque atualizado " + response.rows+ " " +polo)) ;
-      };
+        let stock = req.body;
 
-/*
-export async function selectPessoa(req, res){
-    let id = req.body.id;
-    openDb().then(db=>{
-        db.get('SELECT * FROM Pessoa WHERE id=?', [id])
-        .then(pessoa=> res.json(pessoa) );
-    });
-}
-
-export async function insertPessoa(req, res){
-    let pessoa = req.body;
-    openDb().then(db=>{
-        db.run('INSERT INTO Pessoa (nome, idade) VALUES (?,?)', [pessoa.nome, pessoa.idade]);
-    });
-    res.json({
-        "statusCode": 200
-    })
-}
-
-export async function updatePessoa(req, res){
-    let pessoa = req.body;
-    openDb().then(db=>{
-        db.run('UPDATE Pessoa SET nome=?, idade=? WHERE id=?', [pessoa.nome, pessoa.idade, pessoa.id]);
-    });
-    res.json({
-        "statusCode": 200
-    })
-}
-
-export async function deletePessoa(req, res){
-    let id = req.body.id;
-    openDb().then(db=>{
-        db.get('DELETE FROM Pessoa WHERE id=?', [id])
-        .then(res=>res)
-    });
-    res.json({
-        "statusCode": 200
-    })
-}
-*/
+        openDb().then(db=>{
+          db.run("UPDATE estoque SET stock = $1 WHERE polo LIKE '%' || $2 || '%'",
+          [stock.stock, stock.polo])
+          
+        });
+        res.json({
+            "statusCode": 200
+        })
+    }
