@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="estilos_d.css">
+		<title>STONE mirror</title>
+	</head>
+	
+	<body>
+		<form>
+			<div class="img">
+				<img src="fotos/stone.jpg"  width="175" height="75" alt="historia portafolio">	
+			</div> 
+			<h2>Controle de Estoque Operacional</h2>
+			<input class="card_verde_T" type="button" value="BUSCA TODOS" onclick="seleccion_cuadros(7)"><br>
+			 POLO: <input type="text" onkeyup="this.value = this.value.toUpperCase();" id="userpl"> 
+			<input type="button" value="Buscar" onclick="buscarPL()">
+			<input class="card_vermelo_N" type="button" value="Menor que 10" onclick="seleccion_cuadros(1)">
+			<input class="card_amarelo_N" type="button" value="Entre 10 e 13" onclick="seleccion_cuadros(2)">
+			<input class="card_verde" type="button" value="Entre 14 e 18" onclick="seleccion_cuadros(3)">
+			<input class="card_amarelo_P" type="button" value="Entre 19 e 23" onclick="seleccion_cuadros(4)">
+			<input class="card_vermelo_P" type="button" value="Maior que 23" onclick="seleccion_cuadros(5)">	
+		</form>
+		<header>
+				<div class="container"> </div>
+				<div class="img"></div> 
+				<div id="contenido"></div>		
+		</header>
+		<div id="main">
+			<table class="tabla" id="tabla">
+				<thead>
+					<tr>
+						<th>POLO</th>
+						<th>STOCK</th>
+						<th>VENDAS</th>
+						<th>DIAS-EFEC</th>
+						<th>MEDIA</th>
+						<th>AUTONOMIA</th>
+						<th>REP-STK</th>	
+					</tr>
+				</thead>
+				<tbody class="centrado">
+			</table>
+		</div>
+		<script src="javascripts.js"></script>		
+	</body>
+</html>	

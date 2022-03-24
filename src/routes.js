@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { selectEstoque, selectAtendimentos, SumAllStock, SumUmStock, AddStock } from './Controler/Servicios.js';
+import { selectEstoque, selectAtendimentos, SumAllStock, SumUmStock, UpdStock } from './Controler/Servicios.js';
 
 const router = Router();
 
@@ -21,6 +21,6 @@ router.get('/stocks/', SumAllStock);
 router.get('/stock/', SumUmStock);
 
 // ==> Rota responsável por criar um novo 'Stock': (POST): localhost:4000/api/stock/:polo
-router.put('/stock/', AddStock);
+router.put('/stock/', UpdStock);
 
 export default router;

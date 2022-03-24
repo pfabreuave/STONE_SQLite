@@ -1,0 +1,373 @@
+
+
+html{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+/*	background-color: hsl(144, 100%, 10%); */
+}
+
+#main{	
+	width: 700px; 	
+	height: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#control{	
+	background-color: '#ff8000';
+}
+
+header {
+/*	background-color: hsl(144, 100%, 10%);*/
+	height: auto;
+	background: url("fotos/pant_stone.jpg");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+  } 
+
+header a{
+	color: #ffffff;
+	text-align: center;
+	/*background-color: black;*/
+	padding: 5px 5px;
+	margin-top: auto;
+	margin-bottom: auto;
+	text-decoration: none;
+  }
+
+header a:hover{
+	background-color: #56c9d6;	
+}
+
+.encab{ 
+	margin-top:   5%; 
+}
+
+.contenedor{
+	flex-direction: column;
+	display: flex;
+	width: 100vw;
+	justify-content: center;
+}
+
+div{
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;	
+}
+
+.card_SIN_VENTAS{
+	justify-content: center;
+	align-content: center;
+	background: hsl(70, 4%, 69%);
+	width: 110px;
+	height: 50px;
+	border-radius: 8px;
+	border: solid 2px #f0a;
+	margin: 10px auto;
+	transition: 1s;	
+}
+
+.card{
+	justify-content: center;
+	align-content: center;
+	background: tomato;
+	width: 110px;
+	height: 50px;
+	border-radius: 8px;
+	border: solid 2px #f0a;
+	margin: 10px auto;
+	transition: 1s;	
+}
+
+.card_verde{
+	justify-content: center;
+	align-content: center;
+	background: #3cff00;
+	width: 110px;
+	height: 50px;
+	border-radius: 8px;
+	border: solid 2px #f0a;
+	margin: 10px auto;
+	transition: 1s;	
+}
+
+.card_verde_T{
+	justify-content: center;
+	align-content: center;
+	background: #22ae45;
+	width: 150px;
+	height: 50px;
+	border-radius: 8px;
+	border: solid 2px #f0a;
+	margin: 10px auto;
+	transition: 1s;	
+}
+
+.card_naranja_T{
+	justify-content: center;
+	align-content: center;
+	background: #ff8000;
+	width: 110px;
+	height: 50px;
+	border-radius: 8px;
+	border: solid 2px #f0a;
+	margin: 10px auto;
+	transition: 1s;	
+}
+
+.card_naranja_N{	
+	background: #ff8000;	
+}
+
+.card_amarelo_N{
+	justify-content: center;
+	align-content: center;
+	background: #ffff00;
+	width: 110px;
+	height: 50px;
+	border-radius: 8px;
+	border: solid 2px #f0a;
+	margin: 10px auto;
+	transition: 1s;	
+}
+
+.card_amarelo_P{
+	justify-content: center;
+	align-content: center;
+	background: #f8c046;
+	width: 110px;
+	height: 50px;
+	border-radius: 8px;
+	border: solid 2px #f0a;
+	margin: 10px auto;
+	transition: 1s;	
+}
+
+.card_vermelo_N{
+	justify-content: center;
+	align-content: center;
+	background: #ff330f;
+	width: 110px;
+	height: 50px;
+	border-radius: 8px;
+	border: solid 2px #f0a;
+	margin: 10px auto;
+	transition: 1s;	
+}
+
+.card_vermelo_P{
+	justify-content: center;
+	align-content: center;
+	background: #a51611; 
+	width: 110px;
+	height: 50px;
+	border-radius: 8px;
+	border: solid 2px #f0a;
+	margin: 10px auto;
+	transition: 1s;	
+}
+
+div a{
+	text-decoration: none;
+	font-size: 11px;
+	font-weight: 700;
+	line-height: 1.68;
+	color: #000;
+	transition: 0.5s;	
+}
+
+a:hover{
+	color:#fff;
+}
+
+.card:hover{
+    background: #1488cc;
+    box-shadow: 8px 18px 25px #ab8c87;
+
+}
+body{ 
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+}
+
+.formulario{
+	margin-top: 50px;
+	align-items: center;
+	justify-content: center;
+}
+
+.img {
+		align-items: center;
+		justify-content: center;
+}
+
+.men{text-align: right;};
+
+.centrado{	
+	text-align:center;
+	border:1px dotted #000;
+	padding: 8px;
+	color:#000000;
+	font-size:15px;
+	font-weight: 500;
+	line-height:21px;	
+}
+
+.total_rep{
+	font-weight: bold;
+	font-size:20px;
+}
+
+.campo_polo{
+	text-align:left;	
+}
+
+.horizontal {
+	border-collapse: separate;
+	border-spacing: 15px;
+	border: 1px solid #000;
+	
+}
+
+.distancia {
+-webkit-column-count: 3;
+-moz-column-count: 3; 
+column-count: 3;
+-webkit-column-gap: 4em;
+-moz-column-gap: 4em; 
+column-gap: 4em;
+-webkit-column-gap: 40px;
+-moz-column-gap: 40p; 
+column-gap: 40p;
+}
+
+.both {
+	border-collapse: separate;
+	border-spacing: 40px 10px;
+	border: 1px solid #000;
+}	
+
+.parpadea {
+	text-align:center;
+	border:1px dotted #000;
+	padding:8px;
+	color:#bb997d;
+	font-size:25px;
+	font-weight: 500;
+	line-height:21px;
+	text-transform:uppercase;
+
+animation-name: parpadeo;
+animation-duration: 1s;
+animation-timing-function: linear;
+animation-iteration-count: infinite;
+
+-webkit-animation-name:parpadeo;
+-webkit-animation-duration: 1s;
+-webkit-animation-timing-function: linear;
+-webkit-animation-iteration-count: infinite;
+}
+
+/*
+				apartir de aqui
+*/
+
+  .mcard {
+	font-size: 16px;  
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	width: 137px;
+    height: 60px;
+	background: #00a868;
+	margin: 20px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+	border: 2px solid #008033;
+	text-align: center;
+  }
+
+  .mcard1 {
+	font-size: 18px;  
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	width: 137px;
+    height: 100px;
+	background: #FF3030;
+	margin: 20px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+	border: 2px solid #008033;
+	text-align: center;
+  }
+  .mcard2 {
+	font-size: 18px;  
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	width: 137px;
+    height: 100px;
+	background: #ffff00;
+	margin: 20px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+	border: 2px solid #008033;
+	text-align: center;
+  } 
+
+  .mcard3 {
+	font-size: 18px;  
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	width: 137px;
+    height: 100px;
+	background: #3cff00;
+	margin: 20px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+	border: 2px solid #008033;
+	text-align: center;
+  }
+
+  .mcard4 {
+	font-size: 18px;  
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	width: 137px;
+    height: 100px;
+	background: #f8c046;
+	margin: 20px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+	border: 2px solid #008033;
+	text-align: center;
+  }
+
+  .mcard5 {
+	font-size: 16px;  
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	width: 137px;
+    height: 100px;
+	background: #A52A2A;
+	margin: 20px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+	border: 2px solid #008033;
+	text-align: center;
+  }

@@ -18,9 +18,11 @@ export async function selectAtendimentos(req, res){
 /*
   consolidação de todos os POLOS das tabelas ATENDIMENTO e STOCK
 */
+
 export async function SumAllStock(req, res)  {
-    openDb().then(db=>{db.all
-    (`SELECT polo, stock, venda, dias_Hab,
+    openDb().then(db=>{db.all(
+
+    `SELECT polo, stock, venda, dias_Hab,
     (venda / dias_hab) as media,
     (stock / (venda / dias_hab) )  as auto,
     CASE WHEN ((stock / (Venda / Dias_Hab))) < 10 THEN 1
@@ -41,7 +43,9 @@ ON (atendimentos.polo = estoque.polo)
 GROUP BY atendimentos.polo, estoque.stock) as selt`,
   )
   .then(stock=>  res.json(stock))
-    }); 
+  
+    });
+    
   };
 
 /*
@@ -50,7 +54,7 @@ GROUP BY atendimentos.polo, estoque.stock) as selt`,
 export async function SumUmStock(req, res)  {
     let polo = req.body.polo;
     openDb().then(db=>{ 
-    db.all(`SELECT polo, stock, venda, dias_Hab,
+    const response = db.all(`SELECT polo, stock, venda, dias_Hab,
     (venda / dias_hab) as media,
     (stock / (venda / dias_hab) )  as auto,
     CASE WHEN ((stock / (Venda / Dias_Hab))) < 10 THEN 1
@@ -80,7 +84,7 @@ GROUP BY atendimentos.polo, estoque.stock) as selt`,
 /*
        Atualização do STOCK de um Polo na Tabela de ESTOQUE
 */
-       export async function AddStock(req, res)  { 
+       export async function UpdStock(req, res)  { 
        
         let stock = req.body;
 
