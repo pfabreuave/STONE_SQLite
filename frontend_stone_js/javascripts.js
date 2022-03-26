@@ -32,17 +32,21 @@
 				.then((resp) => resp.json())
 				.then(function(data){		
 				mirror = data
-				for(j=0;j<data.stock.length;j++){ 
-					mirror.stock[j].polo = data.stock[j].polo
-					mirror.stock[j].stock = Number(data.stock[j].stock)
-					mirror.stock[j].venda = Number(data.stock[j].venda)
-					mirror.stock[j].dias_hab = Number(data.stock[j].dias_hab)
-					mirror.stock[j].media = Number(data.stock[j].media)
-					mirror.stock[j].auto = Number(data.stock[j].auto)
-					mirror.stock[j].cat = Number(data.stock[j].cat)
-					mirror.stock[j].rep = Number(data.stock[j].rep)
+				
+				
+				for(j=0;j<data.length;j++){ 
+					mirror[j].polo = data[j].polo 
+					mirror[j].stock = Number(data[j].stock)
+					mirror[j].venda = Number(data[j].venda)
+					mirror[j].dias_hab = Number(data[j].dias_hab)
+					mirror[j].media = Number(data[j].media)
+					mirror[j].auto = Number(data[j].auto)
+					mirror[j].cat = Number(data[j].cat)
+					mirror[j].rep = Number(data[j].rep)
+					
 				}
-				seleccion_cuadros(7);		
+				seleccion_cuadros(7);
+						
 			})
 				
 			/*
@@ -50,13 +54,13 @@
 			*/
 			function update_stock(upd_stock, j) {
 				
-				var polom = mirror.stock[j].polo 
+				var polom = mirror[j].polo 
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
 
 				var raw = JSON.stringify({
-					"stock": mirror.stock[j].stock,
-					"polo": mirror.stock[j].polo
+					"stock": mirror[j].stock,
+					"polo": mirror[j].polo
 				});
 
 				var requestOptions = {
@@ -81,7 +85,7 @@
 			*/
 
 			function busca_um_polo(j) {
-				var polom = mirror.stock[j].polo
+				var polom = mirror[j].polo
 				var url = "http://localhost:3000/stock/" +polom;
 				fetch(url, {method: 'GET'})
 				.then((resp) => resp.json())
@@ -96,8 +100,8 @@
 			function buscarPL() {
 				j = Number(0);
 				userpl = document.getElementById("userpl");
-				for(j=0;j<mirror.stock.length;j++) {
-						if (userpl.value == mirror.stock[j].polo){
+				for(j=0;j<mirror.length;j++) {
+						if (userpl.value == mirror[j].polo){
 							buscack(j)
 							j = 1 + mirror.stock.length;
 							document.getElementById("userpl").value = "";
@@ -115,63 +119,63 @@
 			*/
 
 			function buscack(j) {
-				if ((categoria == mirror.stock[j].cat) || (categoria == 7)){
+				if ((categoria == mirror[j].cat) || (categoria == 7)){
 					document.getElementById('registro_'+j).className = 'parpadea';
-					document.getElementById('reg_'+j).style.backgroundColor=cols[mirror.stock[j].cat];
+					document.getElementById('reg_'+j).style.backgroundColor=cols[mirror[j].cat];
 				}
 				
-				var respuesta =	confirm("Polo = "+mirror.stock[j].polo+
-								"\nCategoria = "+catg[mirror.stock[j].cat]+
-								"\nStock = "+mirror.stock[j].stock+" unidades"+
-								"\nVendas = "+mirror.stock[j].venda+" unidades"+
-								"\nMedia = "+mirror.stock[j].media+" unidades por dia"+
-								"\nAutonomia = "+mirror.stock[j].auto+" Dias"+
-								"\nReposicao = "+mirror.stock[j].rep+" unidades"+
+				var respuesta =	confirm("Polo = "+mirror[j].polo+
+								"\nCategoria = "+catg[mirror[j].cat]+
+								"\nStock = "+mirror[j].stock+" unidades"+
+								"\nVendas = "+mirror[j].venda+" unidades"+
+								"\nMedia = "+mirror[j].media+" unidades por dia"+
+								"\nAutonomia = "+mirror[j].auto+" Dias"+
+								"\nReposicao = "+mirror[j].rep+" unidades"+
 								"\n"+
 								"\n Se voce deseja atualizar o estoque, Confirme");
 
 				if(respuesta) {
-					var upd_stock = (mirror.stock[j].rep + " e o valor sugerido,");
+					var upd_stock = (mirror[j].rep + " e o valor sugerido,");
 			 		var nupd_stock = prompt (upd_stock +" se voce deseja alterar, insira um novo valor ")
 			 		if (nupd_stock != 0){
-						mirror.stock[j].rep = Number(nupd_stock)
-						mirror.stock[j].stock = Number((mirror.stock[j].rep + mirror.stock[j].stock))
-						mirror.stock[j].auto = Math.round(mirror.stock[j].stock / mirror.stock[j].media)
-						mirror.stock[j].rep = Number(0)
-						if (mirror.stock[j].auto < 10){ 
-					 		mirror.stock[j].cat= Number(1);
-					 		mirror.stock[j].rep = Number((14 - mirror.stock[j].auto) * mirror.stock[j].media);	 
+						mirror[j].rep = Number(nupd_stock)
+						mirror[j].stock = Number((mirror[j].rep + mirror[j].stock))
+						mirror[j].auto = Math.round(mirror[j].stock / mirror[j].media)
+						mirror[j].rep = Number(0)
+						if (mirror[j].auto < 10){ 
+					 		mirror[j].cat= Number(1);
+					 		mirror[j].rep = Number((14 - mirror[j].auto) * mirror[j].media);	 
 						}
-						if ((mirror.stock[j].auto >= 10) && (mirror.stock[j].auto <= 13)){
-						 	 mirror.stock[j].cat= Number(2);
-					 		 mirror.stock[j].rep = Number((14 - mirror.stock[j].auto) * mirror.stock[j].media);
+						if ((mirror[j].auto >= 10) && (mirror[j].auto <= 13)){
+						 	 mirror[j].cat= Number(2);
+					 		 mirror[j].rep = Number((14 - mirror[j].auto) * mirror[j].media);
 						}
-						if ((mirror.stock[j].auto >= 14) && (mirror.stock[j].auto <= 18)){
-							 mirror.stock[j].cat= Number(3);
-							 mirror.stock[j].rep = Number(0);
+						if ((mirror[j].auto >= 14) && (mirror[j].auto <= 18)){
+							 mirror[j].cat= Number(3);
+							 mirror[j].rep = Number(0);
 						}
-						if ((mirror.stock[j].auto >= 19) && (mirror.stock[j].auto <= 23)){
-					 		 mirror.stock[j].cat= Number(4);
-					 		 mirror.stock[j].rep = Number((14 - mirror.stock[j].auto) * mirror.stock[j].media);	
+						if ((mirror[j].auto >= 19) && (mirror[j].auto <= 23)){
+					 		 mirror[j].cat= Number(4);
+					 		 mirror[j].rep = Number((14 - mirror[j].auto) * mirror[j].media);	
 						}
-						if (mirror.stock[j].auto > 23){
-					 		mirror.stock[j].cat= Number(5);
-					 		mirror.stock[j].rep = Number((14 - mirror.stock[j].auto) * mirror.stock[j].media);	 
+						if (mirror[j].auto > 23){
+					 		mirror[j].cat= Number(5);
+					 		mirror[j].rep = Number((14 - mirror[j].auto) * mirror[j].media);	 
 						}
 			 		}
 				 	else { 
-						mirror.stock[j].stock = Number((mirror.stock[j].rep + mirror.stock[j].stock))
-						mirror.stock[j].rep = Number(0)
-						mirror.stock[j].auto = Math.round(mirror.stock[j].stock / mirror.stock[j].media)
-						mirror.stock[j].cat = Number(3)	
+						mirror[j].stock = Number((mirror[j].rep + mirror[j].stock))
+						mirror[j].rep = Number(0)
+						mirror[j].auto = Math.round(mirror[j].stock / mirror[j].media)
+						mirror[j].cat = Number(3)	
 					}
 
 				/*
 						AQUI LLAMADO AL UPDATE
 				*/
 
-					update_stock(+mirror.stock[j].stock, j)
-					confirm("stock atualizado com " +mirror.stock[j].stock +" unidades; nova categoria " +catg[mirror.stock[j].cat][0])
+					update_stock(+mirror[j].stock, j)
+					confirm("stock atualizado com " +mirror[j].stock +" unidades; nova categoria " +catg[mirror[j].cat][0])
 					seleccion_polo(j)
 		 		} else {
 					alert("Voce nao aceitou."); 						
@@ -184,11 +188,11 @@
 	
 			function seleccion_cuadros(categoria) {	
 				    contenido.innerHTML = ' ';
-    				for(j=0;j<mirror.stock.length;j++) {
-						if ((mirror.stock[j].cat == categoria) || (categoria == 7)) {	
+    				for(j=0;j<mirror.length;j++) {
+						if ((mirror[j].cat == categoria) || (categoria == 7)) {	
 							document.getElementById("contenido").innerHTML +=
-							'<a  onclick="buscack('+j+')" id="registro_'+j+'"  class="card_SIN_VENTAS">'+mirror.stock[j].polo+'</a>'
- 							document.getElementById('registro_'+j).style.backgroundColor=cols[mirror.stock[j].cat];  
+							'<a  onclick="buscack('+j+')" id="registro_'+j+'"  class="card_SIN_VENTAS">'+mirror[j].polo+'</a>'
+ 							document.getElementById('registro_'+j).style.backgroundColor=cols[mirror[j].cat];  
 						}				
     				}
 			
@@ -201,17 +205,17 @@
 					var acumula_vendas = Number(0);
 					var acumula_rep = Number(0);
 					var acumula_stock = Number(0);
-				 	for(j=0;j<mirror.stock.length;j++) {
-						if ((mirror.stock[j].cat == categoria) || (categoria == 7)) {
+				 	for(j=0;j<mirror.length;j++) {
+						if ((mirror[j].cat == categoria) || (categoria == 7)) {
 							acumula_polos = (acumula_polos + 1);
-							acumula_stock = (mirror.stock[j].stock + acumula_stock);
-							acumula_vendas = (mirror.stock[j].venda + acumula_vendas);
-							acumula_rep = mirror.stock[j].rep + acumula_rep;
+							acumula_stock = (mirror[j].stock + acumula_stock);
+							acumula_vendas = (mirror[j].venda + acumula_vendas);
+							acumula_rep = mirror[j].rep + acumula_rep;
 							document.getElementById("tabla").innerHTML +=
-							'<tr class="centrado" id="reg_'+j+'"><td class="campo_polo">'+mirror.stock[j].polo+'</td><td>'
-							+mirror.stock[j].stock+'</td><td>'+mirror.stock[j].venda+'</td><td>'
-							+mirror.stock[j].dias_hab+'</td><td>'+mirror.stock[j].media+'</td><td>'
-							+mirror.stock[j].auto+'</td><td>'+mirror.stock[j].rep+'</td></tr>' 
+							'<tr class="centrado" id="reg_'+j+'"><td class="campo_polo">'+mirror[j].polo+'</td><td>'
+							+mirror[j].stock+'</td><td>'+mirror[j].venda+'</td><td>'
+							+mirror[j].dias_hab+'</td><td>'+mirror[j].media+'</td><td>'
+							+mirror[j].auto+'</td><td>'+mirror[j].rep+'</td></tr>' 
 						}
 						
 					}
@@ -236,13 +240,13 @@
 			function seleccion_polo(j) {	
 				contenido.innerHTML = ' ';
 				contenido.innerHTML +=` <div>
-					<a class='mcard${mirror.stock[j].cat}'>  ${mirror.stock[j].polo} </a>
-					<a class="mcard">STOCK  = ${mirror.stock[j].stock} </a>
-					<a class="mcard">VENDAS = ${mirror.stock[j].venda} </a>
-					<a class="mcard">DIAS-HAB = ${mirror.stock[j].dias_hab} </a>
-					<a class="mcard">MEDIA = ${mirror.stock[j].media} </a>
-					<a class="mcard">AUTONOMIA = ${mirror.stock[j].auto} </a>
-					<a class="mcard">REPOS = ${mirror.stock[j].rep} </a>
+					<a class='mcard${mirror[j].cat}'>  ${mirror[j].polo} </a>
+					<a class="mcard">STOCK  = ${mirror[j].stock} </a>
+					<a class="mcard">VENDAS = ${mirror[j].venda} </a>
+					<a class="mcard">DIAS-HAB = ${mirror[j].dias_hab} </a>
+					<a class="mcard">MEDIA = ${mirror[j].media} </a>
+					<a class="mcard">AUTONOMIA = ${mirror[j].auto} </a>
+					<a class="mcard">REPOS = ${mirror[j].rep} </a>
  					</div>`	
 			}
 			
