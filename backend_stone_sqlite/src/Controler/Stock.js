@@ -102,8 +102,10 @@ export async function UpdStock(req, res)  {
       
     });
     res.json({
-        "statusCode": 200
+        "statusCode": 200,
+         "stock": stock
     })
+    
 }  
 
 

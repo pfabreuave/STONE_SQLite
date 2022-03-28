@@ -32,8 +32,6 @@
 				.then((resp) => resp.json())
 				.then(function(data){		
 				mirror = data
-				
-				
 				for(j=0;j<data.length;j++){ 
 					mirror[j].polo = data[j].polo 
 					mirror[j].stock = Number(data[j].stock)
@@ -54,7 +52,7 @@
 			*/
 			function update_stock(upd_stock, j) {
 				
-				var polom = mirror[j].polo 
+				
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
 
@@ -97,21 +95,20 @@
 				opcion postman buscar un polo
 			*/
 			function buscarPL1() {
-				
+
 				var raw = "{\r\n    \r\n		\"polo\": \"RJ - NITEROI\"\r\n}";
 
 				var requestOptions = {
-  					method: 'GET',
+  					method: 'POST',
   					body: raw,
   					redirect: 'follow'
 				};
 
 				fetch("http://localhost:3000/stock/", requestOptions)
-  					.then(response => response.text())
-  					.then(result => console.log(result))
-  					.catch(error => console.log('error', error));
-  					
-			}
+  						.then(response => response.text())
+  						.then(result => console.log(result))
+  						.catch(error => console.log('error', error));
+				}
 
 			
 
@@ -125,7 +122,7 @@
 				for(j=0;j<mirror.length;j++) {
 						if (userpl.value == mirror[j].polo){
 							buscack(j)
-							j = 1 + mirror.stock.length;
+							j = 1 + mirror.length;
 							document.getElementById("userpl").value = "";
 						};
 					};
