@@ -17,5 +17,5 @@ SELECT polo as POLO, stock, Venda, Dias_Hab,
     JOIN estoque
     ON (atendimentos.polo = estoque.polo)   
 
-            WHERE estoque.polo = 'RJ -'  
+            WHERE estoque.polo = 'RJ - BANGU'  
            GROUP BY atendimentos.polo, estoque.stock) as t
