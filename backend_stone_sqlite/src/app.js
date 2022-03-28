@@ -10,4 +10,9 @@ app.use(cors());
 import router from './routes.js'
 app.use(router);
 
-app.listen( 3000, ()=>console.log("Api Rodando."))
+//app.listen( 3000, ()=>console.log("Api Rodando. "))
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log("Api Rodando na porta ", port);
+});

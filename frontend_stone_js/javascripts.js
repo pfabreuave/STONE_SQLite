@@ -12,7 +12,7 @@
 					 ["TOTAL"]
 					 ];	
 					 
-				 /*	 var cols = ["cinza", "vermelo", "amarelo", "verde", "amarelo", "vermelo", "verde", naranja]; */	
+			/*	 var cols = [ "cinza", "vermelo", "amarelo", "verde",   "amarelo", "vermelo", "verde",   naranja]; */	
 				 
 				 var cols = ['003355', '#FF3030', '#ffff00', '#3cff00', '#f8c046', '#A52A2A', '#006400', '#ff8000'];
 			var v = Number(0)		 
@@ -89,9 +89,31 @@
 				var url = "http://localhost:3000/stock/" +polom;
 				fetch(url, {method: 'GET'})
 				.then((resp) => resp.json())
-				.then(function(data){		
+				.then(function(data){
+					console.log(data.length)		
 				})
 			}
+			/*
+				opcion postman buscar un polo
+			*/
+			function buscarPL1() {
+				
+				var raw = "{\r\n    \r\n		\"polo\": \"RJ - NITEROI\"\r\n}";
+
+				var requestOptions = {
+  					method: 'GET',
+  					body: raw,
+  					redirect: 'follow'
+				};
+
+				fetch("http://localhost:3000/stock/", requestOptions)
+  					.then(response => response.text())
+  					.then(result => console.log(result))
+  					.catch(error => console.log('error', error));
+  					
+			}
+
+			
 
 			/*
 			   	busca un Polo por nombre en la tabela interna
@@ -107,9 +129,9 @@
 							document.getElementById("userpl").value = "";
 						};
 					};
-					if (j <= mirror.stock.length) {
-						alert("Com licença, " +userpl.value+
-						"  não encontrado,\ntente com otro,\n				                                    Obrigado ");
+					if (j <= mirror.length) {
+						alert("Com licenca, " +userpl.value+
+						"  nao encontrado,\ntente com otro,\n				                                    Obrigado ");
 						document.getElementById("userpl").value = "";
 					};			
 			}

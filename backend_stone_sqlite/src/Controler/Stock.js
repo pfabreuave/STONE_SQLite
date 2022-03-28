@@ -60,7 +60,7 @@ export async function selectStocks(req, res){
 */
 
 export async function selectStock(req, res)  {
-    let polo = req.body.polo;
+    let stock = req.body;
     openDb().then(db=>{ 
     const response = db.all(`SELECT polo, stock, venda, dias_Hab,
     (venda / dias_hab) as media,
@@ -83,7 +83,7 @@ ON (atendimentos.polo = estoque.polo)
 
 WHERE estoque.polo LIKE '%' || $1 || '%'   
 GROUP BY atendimentos.polo, estoque.stock) as selt`,
-[polo]
+[stock.polo]
   )
   .then(stock=>  res.json(stock))
     }); 
