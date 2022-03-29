@@ -16,7 +16,7 @@ router.get('/atendimentos', selectAtendimentos);
 // ==> consolidad todos lo movimientos de cada POLO y calcula la reglas de negocio
 router.get('/stocks', selectStocks);
 // ==> consolidad todos lo movimientos de cada POLO y calcula la reglas de negocio
-router.get('/stock', selectStock);
+router.post('/stockp', selectStock);
 // ==> actualiza el stock de un POLO
 router.post('/stock/', UpdStock);
 

@@ -84,30 +84,62 @@
 
 			function busca_um_polo(j) {
 				var polom = mirror[j].polo
-				var url = "http://localhost:3000/stock/" +polom;
+				var url = "http://localhost:3000/stockp/" +polom;
 				fetch(url, {method: 'GET'})
 				.then((resp) => resp.json())
 				.then(function(data){
-					console.log(data.length)		
+					console.log(data.length)
+							
 				})
 			}
 			/*
 				opcion postman buscar un polo
+						No habilitado
 			*/
 			function buscarPL1() {
+				
+				console.log(userpl.value)
+				
 
-				var raw = "{\r\n    \r\n		\"polo\": \"RJ - NITEROI\"\r\n}";
+				var myHeaders = new Headers();
+				myHeaders.append("Content-Type", "application/json");
 
+				var raw = JSON.stringify({
+						"polo": "RJ - "
+					
+				});
+				
 				var requestOptions = {
-  					method: 'POST',
-  					body: raw,
-  					redirect: 'follow'
+					method: 'POST',
+					headers: myHeaders,
+					body: raw,
+					redirect: 'follow'
 				};
 
-				fetch("http://localhost:3000/stock/", requestOptions)
-  						.then(response => response.text())
-  						.then(result => console.log(result))
-  						.catch(error => console.log('error', error));
+				
+				
+				var url = "http://localhost:3000/stockp/";
+				fetch(url, requestOptions)
+					.then((resp) => resp.json())
+					.then(function(data){		
+				 	mirror = data
+				 	console.log(data.length)
+				 	console.log(data)
+					for(j=0;j<data.length;j++){ 
+						mirror[j].polo = data[j].polo 
+						mirror[j].stock = Number(data[j].stock)
+						mirror[j].venda = Number(data[j].venda)
+						mirror[j].dias_hab = Number(data[j].dias_hab)
+						mirror[j].media = Number(data[j].media)
+						mirror[j].auto = Number(data[j].auto)
+						mirror[j].cat = Number(data[j].cat)
+						mirror[j].rep = Number(data[j].rep)
+						
+					}
+					seleccion_cuadros(7); 
+					}) 
+					.catch(error=>console.log(error))
+					
 				}
 
 			
