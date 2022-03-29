@@ -82,30 +82,22 @@
 									No habilitado
 			*/
 
-			function busca_um_polo(j) {
-				var polom = mirror[j].polo
-				var url = "http://localhost:3000/stockp/" +polom;
-				fetch(url, {method: 'GET'})
-				.then((resp) => resp.json())
-				.then(function(data){
-					console.log(data.length)
-							
-				})
-			}
+			
 			/*
-				opcion postman buscar un polo
-						No habilitado
+				Buca un polo e devuelve un consolidado de las tabelas  de ATENDIMENTO E STOCK
+				
+							ruta para consultar un polo pasando el parametro via body
+
+												No habilitado
 			*/
-			function buscarPL1() {
-				
-				console.log(userpl.value)
-				
+			
+			function busca_um_polo() {
 
 				var myHeaders = new Headers();
 				myHeaders.append("Content-Type", "application/json");
 
 				var raw = JSON.stringify({
-						"polo": "RJ - "
+						"polo": userpl.value
 					
 				});
 				
@@ -115,8 +107,6 @@
 					body: raw,
 					redirect: 'follow'
 				};
-
-				
 				
 				var url = "http://localhost:3000/stockp/";
 				fetch(url, requestOptions)
@@ -135,12 +125,12 @@
 						mirror[j].cat = Number(data[j].cat)
 						mirror[j].rep = Number(data[j].rep)
 						
-					}
+						}
 					seleccion_cuadros(7); 
 					}) 
 					.catch(error=>console.log(error))
 					
-				}
+			}
 
 			
 
