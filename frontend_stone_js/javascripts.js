@@ -36,7 +36,7 @@
 					mirror[j].polo = data[j].polo 
 					mirror[j].stock = Number(data[j].stock)
 					mirror[j].venda = Number(data[j].venda)
-					mirror[j].dias_hab = Number(data[j].dias_hab)
+					mirror[j].dias_hab = Number(data[j].Dias_Hab)
 					mirror[j].media = Number(data[j].media)
 					mirror[j].auto = Number(data[j].auto)
 					mirror[j].cat = Number(data[j].cat)
@@ -77,11 +77,6 @@
 					.catch(error=>console.log(error))
 			}
 
-			/*
-				Buca un polo e devuelve un consolidado de las tabelas  de ATENDIMENTO E STOCK
-									No habilitado
-			*/
-
 			
 			/*
 				Buca un polo e devuelve un consolidado de las tabelas  de ATENDIMENTO E STOCK
@@ -119,7 +114,7 @@
 						mirror[j].polo = data[j].polo 
 						mirror[j].stock = Number(data[j].stock)
 						mirror[j].venda = Number(data[j].venda)
-						mirror[j].dias_hab = Number(data[j].dias_hab)
+						mirror[j].dias_hab = Number(data[j].Dias_Hab)
 						mirror[j].media = Number(data[j].media)
 						mirror[j].auto = Number(data[j].auto)
 						mirror[j].cat = Number(data[j].cat)
@@ -136,6 +131,7 @@
 
 			/*
 			   	busca un Polo por nombre en la tabela interna
+				   			no Habilitado
 			*/
 					
 			function buscarPL() {

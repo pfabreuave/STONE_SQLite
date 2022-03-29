@@ -10,13 +10,13 @@ router.get('/', (req, res)=>{
     })
 })
 // ==> listado completo de la tabela estoque
-router.get('/estoques', selectEstoque);
+router.get('/estoques/', selectEstoque);
 // ==> listado de 50 registros de la tabela de atendimentos
-router.get('/atendimentos', selectAtendimentos);
+router.get('/atendimentos/', selectAtendimentos);
 // ==> consolidad todos lo movimientos de cada POLO y calcula la reglas de negocio
-router.get('/stocks', selectStocks);
-// ==> consolidad todos lo movimientos de cada POLO y calcula la reglas de negocio
-router.post('/stockp', selectStock);
+router.get('/stocks/', selectStocks);
+// ==> consolidad todos lo movimientos de un POLO o GRUPO y calcula la reglas de negocio
+router.post('/stockp/', selectStock);
 // ==> actualiza el stock de un POLO
 router.post('/stock/', UpdStock);
 
