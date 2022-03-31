@@ -44,7 +44,7 @@ export async function selectStocks(req, res){
         ELSE (14 - ((stock / (Venda / Dias_Hab)))) * (Venda / Dias_Hab) END AS rep
     FROM (SELECT  atendimentos.polo, 
       COUNT(*) as venda,
-      COUNT(distinct fecha) as Dias_Hab,
+      COUNT(distinct fecha) as dias_hab,
       estoque.stock
       FROM atendimentos
     JOIN estoque
@@ -59,7 +59,7 @@ export async function selectStocks(req, res){
   consolidação de um POLO das tabelas ATENDIMENTO e STOCK
 */
 
-export async function selectStock(req, res)  {
+export async function selectStockp(req, res)  {
     let stock = req.body;
     openDb().then(db=>{ 
     const response = db.all(`SELECT polo, stock, venda, dias_Hab,
@@ -75,7 +75,7 @@ export async function selectStock(req, res)  {
     ELSE (14 - ((stock / (Venda / Dias_Hab)))) * (Venda / Dias_Hab) END AS rep
 FROM (SELECT  atendimentos.polo, 
   COUNT(*) as venda,
-  COUNT(distinct fecha) as Dias_Hab,
+  COUNT(distinct fecha) as dias_hab,
   estoque.stock
   FROM atendimentos
 JOIN estoque
@@ -106,7 +106,81 @@ export async function UpdStock(req, res)  {
          "stock": stock
     })
     
-}  
+} 
+
+
+/*
+  consolidação de todos os POLOS das tabelas ATENDIMENTO e STOCK dias calendario como base
+*/
+
+export async function selectStockhs(req, res){
+  openDb().then(db=>{
+      db.all(`SELECT polo, stock, venda, dias_efect, desde, hasta, dias_hab,
+            
+      CAST((venda / dias_hab) AS INTEGER) as media,
+      CAST(stock / (venda / dias_hab) AS INTEGER)  as auto,
+              CASE WHEN ((stock / (Venda / dias_hab))) < 10 THEN 1
+              WHEN ((stock / (venda / dias_hab))) >= 10 AND ((stock / (venda / dias_hab))) <= 13 THEN 2
+              WHEN ((stock / (venda / dias_hab))) >= 14 AND ((stock / (venda / dias_hab))) <= 18 THEN 3
+              WHEN ((stock / (venda / dias_hab))) >= 19 AND ((stock / (venda / dias_hab))) <= 23 THEN 4
+              ELSE 5 END
+              AS cat,
+              CASE WHEN ((stock / (venda / dias_hab))) >= 14 AND ((stock / (venda / dias_hab))) <= 18 THEN 0
+              ELSE CAST(((14 - ((stock / (venda / dias_hab)))) * (venda / dias_hab)) AS INTEGER) END AS rep
+      FROM (SELECT  atendimentos.polo, 
+            COUNT(*) as venda,
+            COUNT(distinct fecha) as dias_efect,
+        MIN(fecha) as desde,
+        MAX(fecha) as hasta,
+       (CAST(strftime("%J", MAX(fecha)) - strftime("%J", MIN(fecha)) AS INTEGER)) AS dias_hab,
+            estoque.stock
+            FROM atendimentos
+      JOIN estoque
+      ON (atendimentos.polo = estoque.polo)   
+      GROUP BY atendimentos.polo, estoque.stock) as selt;`,
+    )
+      .then(stocks=>  res.json(stocks))
+  });
+}
+
+/*
+consolidação de um POLO das tabelas ATENDIMENTO e STOCK dias calendario como base
+*/
+
+export async function selectStockhp(req, res)  {
+  let stock = req.body;
+  openDb().then(db=>{ 
+  const response = db.all(`SELECT polo, stock, venda, dias_efect, desde, hasta, dias_hab,
+            
+          CAST((venda / dias_hab) AS INTEGER) as media,
+          CAST(stock / (venda / dias_hab) AS INTEGER)  as auto,
+          CASE WHEN ((stock / (Venda / dias_hab))) < 10 THEN 1
+          WHEN ((stock / (venda / dias_hab))) >= 10 AND ((stock / (venda / dias_hab))) <= 13 THEN 2
+          WHEN ((stock / (venda / dias_hab))) >= 14 AND ((stock / (venda / dias_hab))) <= 18 THEN 3
+          WHEN ((stock / (venda / dias_hab))) >= 19 AND ((stock / (venda / dias_hab))) <= 23 THEN 4
+          ELSE 5 END
+          AS cat,
+          CASE WHEN ((stock / (venda / dias_hab))) >= 14 AND ((stock / (venda / dias_hab))) <= 18 THEN 0
+          ELSE CAST(((14 - ((stock / (venda / dias_hab)))) * (venda / dias_hab)) AS INTEGER) END AS rep
+  FROM (SELECT  atendimentos.polo, 
+        COUNT(*) as venda,
+        COUNT(distinct fecha) as dias_efect,
+    MIN(fecha) as desde,
+    MAX(fecha) as hasta,
+   (CAST(strftime("%J", MAX(fecha)) - strftime("%J", MIN(fecha)) AS INTEGER)) AS dias_hab,
+        estoque.stock
+        FROM atendimentos
+
+  JOIN estoque
+  ON (atendimentos.polo = estoque.polo)
+
+  WHERE estoque.polo LIKE '%' || $1 || '%'   
+  GROUP BY atendimentos.polo, estoque.stock) as selt`,
+  [stock.polo]
+  )
+  .then(stock=>  res.json(stock))
+  }); 
+};
 
 
 

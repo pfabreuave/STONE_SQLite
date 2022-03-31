@@ -277,6 +277,22 @@ animation-iteration-count: infinite;
 				apartir de aqui
 */
 
+.mcardI {
+	font-size: 16px;  
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	width: 10px;
+    height: 10px;
+	background: #00a868;
+	margin: 20px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+	border: 2px solid #008033;
+	text-align: center;
+  }
+
   .mcard {
 	font-size: 16px;  
 	display: flex;
@@ -290,6 +306,10 @@ animation-iteration-count: infinite;
 	justify-content: center;
 	border-radius: 8px;
 	border: 2px solid #008033;
+	text-align: center;
+  }
+
+  .txtmsj {
 	text-align: center;
   }
 
